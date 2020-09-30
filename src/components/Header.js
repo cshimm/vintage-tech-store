@@ -6,7 +6,9 @@ import CartLink from './Cart/CartLink';
 export default function Header() {
   return (
     <header className='header'>
-      <img src={logo} alt='logo' className='logo' />
+      <Link to='/'>
+        <img src={logo} alt='logo' className='logo' />
+      </Link>
       <nav>
         <ul>
           <div>
