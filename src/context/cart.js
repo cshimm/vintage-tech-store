@@ -65,7 +65,7 @@ function CartProvider({ children }) {
       return;
     } else {
       const newItem = { id, image, title, price, amount: 1 };
-      console.log(image);
+
       const newCart = [...cart, newItem];
       setCart(newCart);
     }
