@@ -19,8 +19,8 @@ export default function ProductDetails() {
     return (
       <section className='single-product'>
         <img
-          src={product.url}
-          alt={product.title}
+          src={product.url || '/'}
+          alt={product.title || 'default'}
           className='single-product-image'
         />
         <article>

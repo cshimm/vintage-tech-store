@@ -10,9 +10,11 @@ export default function Product({ url, title, id, price }) {
     <article className='product'>
       <div className='img-container'>
         <img src={url || img} alt={title || 'default title'} />
-        <Link to={`products/${id}`} className='btn btn-primary product-link'>
-          details
-        </Link>
+        {id ? (
+          <Link to={`products/${id}`} className='btn btn-primary product-link'>
+            details
+          </Link>
+        ) : null}
       </div>
       <div className='product-footer'>
         <p className='product-title'>{title || 'default title'}</p>
@@ -22,7 +24,7 @@ export default function Product({ url, title, id, price }) {
   );
 }
 Product.propTypes = {
-  image: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
