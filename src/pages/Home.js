@@ -10,7 +10,7 @@ export default function Home() {
           our products
         </Link>
       </Hero>
-      <FeaturedProducts />
+      {/* <FeaturedProducts /> */}
     </>
   );
 }
