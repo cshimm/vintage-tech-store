@@ -36,13 +36,13 @@ export default function ProductProvider({ children }) {
     setLoading(true);
     client.getEntries().then((response) => {
       const { items } = response;
-      const productsArray = items.map((item, index) => {
-        const { description, title, price, image, featured } = item.fields;
+      const productsArray = items.map((item) => {
+        const { description, title, price, image, featured, id } = item.fields;
 
         const { value } = description.content[0].content[0];
         const { url } = image.fields.file;
 
-        return { title, value, price, url, key: index, id: index, featured };
+        return { title, value, price, url, key: id, id, featured };
       });
 
       const featuredProduct = featuredProducts(productsArray);
