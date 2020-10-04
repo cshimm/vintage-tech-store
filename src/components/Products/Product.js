@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // import url from '../../utils/URL';
 
-export default function Product({ image, title, id, price }) {
+export default function Product({ url, title, id, price }) {
   return (
     <article className='product'>
       <div className='img-container'>
-        <img src={image} alt={title} />
+        <img src={url} alt={title} />
         <Link to={`products/${id}`} className='btn btn-primary product-link'>
           details
         </Link>

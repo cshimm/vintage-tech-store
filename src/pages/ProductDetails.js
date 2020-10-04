@@ -10,17 +10,24 @@ export default function ProductDetails() {
   const { products } = React.useContext(ProductContext);
   const { addToCart } = React.useContext(CartContext);
   const product = products.find((item) => item.id === parseInt(id));
+  console.log(product);
+
   if (products.length === 0) {
     return <Loading />;
   } else {
-    const { image, title, price, description } = product;
+    // console.log(products);
+
     return (
       <section className='single-product'>
-        <img src={image} alt={title} className='single-product-image' />
+        <img
+          src={product.url}
+          alt={product.title}
+          className='single-product-image'
+        />
         <article>
-          <h1>{title}</h1>
-          <h2>${price}</h2>
-          <p>{description}</p>
+          <h1>{product.title}</h1>
+          <h2>${product.price}</h2>
+          <p>{product.value}</p>
           <button
             className='btn btn-primary btn-block'
             onClick={() => {
