@@ -10,7 +10,6 @@ export default function ProductDetails() {
   const { products } = React.useContext(ProductContext);
   const { addToCart } = React.useContext(CartContext);
   const product = products.find((item) => item.id === parseInt(id));
-  console.log(product);
 
   if (products.length === 0) {
     return <Loading />;
