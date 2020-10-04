@@ -1,10 +1,10 @@
 //login user
 import axios from 'axios';
-import url from '../utils/URL';
+import { strapiURL } from '../utils/URL';
 
 export default async function loginUser({ email, password }) {
   const response = await axios
-    .post(`${url}/auth/local`, {
+    .post(`${strapiURL}/auth/local`, {
       identifier: email,
       password,
     })

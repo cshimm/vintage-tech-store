@@ -1,6 +1,6 @@
 // cart context
 import React from 'react';
-import localCart from '../utils/localCart';
+// import localCart from '../utils/localCart';
 function getCartFromLocalStorage() {
   return localStorage.getItem('cart')
     ? JSON.parse(localStorage.getItem('cart'))

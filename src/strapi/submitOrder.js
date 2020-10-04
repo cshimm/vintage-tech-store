@@ -1,11 +1,11 @@
 // submit order
 import axios from 'axios';
-import url from '../utils/URL';
+import { strapiURL } from '../utils/URL';
 
 async function submitOrder({ name, total, items, stripeTokenId, userToken }) {
   const response = await axios
     .post(
-      `${url}/orders`,
+      `${strapiURL}/orders`,
       {
         name,
         total,

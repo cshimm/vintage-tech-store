@@ -1,9 +1,9 @@
 import axios from 'axios';
-import url from '../utils/URL';
+import { strapiURL } from '../utils/URL';
 
 export default async function registerUser({ email, password, username }) {
   const response = await axios
-    .post(`${url}/auth/local/register`, {
+    .post(`${strapiURL}/auth/local/register`, {
       username,
       email,
       password,

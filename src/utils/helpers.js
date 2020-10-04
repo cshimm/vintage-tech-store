@@ -1,11 +1,12 @@
-import url from './URL';
+// import url from './URL';
 //flatten
 export function flattenProducts(data) {
   return data.map((item) => {
     // cloudindary
-    let image = item.image[0].url;
+    // let image = item.image[0].url;
     // local setup no deployment
-    // let image = `${url}${item.image[0].url}`;
+
+    let image = item.image.url;
     return { ...item, image };
   });
 }
