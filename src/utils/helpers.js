@@ -6,7 +6,7 @@ export function flattenProducts(data) {
     // let image = item.image[0].url;
     // local setup no deployment
 
-    let image = item.image.url;
+    let image = (item.image && item.image.url) || null;
     return { ...item, image };
   });
 }

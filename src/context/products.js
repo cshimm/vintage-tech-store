@@ -38,11 +38,11 @@ export default function ProductProvider({ children }) {
       const { items } = response;
       const productsArray = items.map((item) => {
         const { description, title, price, image, featured, id } = item.fields;
+        const value =
+          (description && description.content[0].content[0].value) || null;
+        const url = (image && image.fields.file.url) || null;
 
-        const { value } = description.content[0].content[0];
-        const { url } = image.fields.file;
-
-        return { title, value, price, url, key: id, id, featured };
+        return { title, value, price, url, key: id || null, id, featured };
       });
 
       const featuredProduct = featuredProducts(productsArray);
