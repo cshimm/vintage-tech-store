@@ -1,8 +1,8 @@
 import React from 'react';
 // { Children }
-import axios from 'axios';
-import url from '../utils/URL';
-import { featuredProducts, flattenProducts } from '../utils/helpers';
+// import axios from 'axios';
+// import url from '../utils/URL';
+// import { featuredProducts, flattenProducts } from '../utils/helpers';
 export const ProductContext = React.createContext();
 
 //provider, consumer, useContext
@@ -22,7 +22,7 @@ const client = contentful.createClient({
 export default function ProductProvider({ children }) {
   const [loading, setLoading] = React.useState(false);
   const [products, setProducts] = React.useState([]);
-  const [featured, setFeatured] = React.useState([]);
+  // const [featured, setFeatured] = React.useState([]);
 
   // React.useEffect(() => {
   //   setLoading(true);
@@ -56,7 +56,7 @@ export default function ProductProvider({ children }) {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, loading, featured }}>
+    <ProductContext.Provider value={{ products, loading }}>
       {children}
     </ProductContext.Provider>
   );
