@@ -56,6 +56,7 @@ export default function ProductProvider({ children }) {
   }, []);
 
   return (
+    //send featured in value prop
     <ProductContext.Provider value={{ products, loading }}>
       {children}
     </ProductContext.Provider>
