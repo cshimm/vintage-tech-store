@@ -1,9 +1,9 @@
 import React from 'react';
-import FeaturedProducts from '../components/Products/FeaturedProducts';
+// import FeaturedProducts from '../components/Products/FeaturedProducts';
 // { Children }
 // import axios from 'axios';
 // import url from '../utils/URL';
-import { featuredProducts, flattenProducts } from '../utils/helpers';
+import { featuredProducts } from '../utils/helpers';
 export const ProductContext = React.createContext();
 
 //provider, consumer, useContext
