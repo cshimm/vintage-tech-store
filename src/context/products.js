@@ -1,4 +1,5 @@
-import React, { Children } from 'react';
+import React from 'react';
+// { Children }
 import axios from 'axios';
 import url from '../utils/URL';
 import { featuredProducts, flattenProducts } from '../utils/helpers';
