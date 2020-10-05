@@ -26,36 +26,39 @@ export default function ProductProvider({ children }) {
     price: 'all',
   });
 
-  // used when content existed on strapi
-
-  // React.useEffect(() => {
-  //   setLoading(true);
-  //   axios.get(`${url}/products`).then((response) => {
-  //     const featuredProduct = featuredProducts(flattenProducts(response.data));
-  //     const products = flattenProducts(response.data);
-  //     setFeatured(featuredProduct);
-  //     setProducts(products);
-  //     setLoading(false);
-  //   });
-  //   return () => {};
-  // }, []);
-
   //content from contentful
   React.useEffect(() => {
     setLoading(true);
     client.getEntries().then((response) => {
       const { items } = response;
       const productsArray = items.map((item) => {
-        const { description, title, price, image, featured, id } = item.fields;
+        const {
+          description,
+          title,
+          price,
+          image,
+          featured,
+          id,
+          freeShipping,
+          category,
+        } = item.fields;
         const value =
           (description && description.content[0].content[0].value) || null;
         const url = (image && image.fields.file.url) || null;
 
-        return { title, value, price, url, key: id || null, id, featured };
+        return {
+          title,
+          value,
+          price,
+          url,
+          key: id || null,
+          id,
+          featured,
+          freeShipping,
+          category,
+        };
       });
-
       const featuredProduct = featuredProducts(productsArray);
-
       setSorted(paginate(productsArray));
       setProducts(productsArray);
       setFeatured(featuredProduct);
@@ -64,11 +67,55 @@ export default function ProductProvider({ children }) {
     return () => {};
   }, []);
 
+  React.useEffect(() => {
+    let newProducts = [...products].sort((a, b) => a.price - b.price);
+    const { search, category, shipping, price } = filters;
+    //logic
+    if (category !== 'all') {
+      newProducts = newProducts.filter((item) => item.category === category);
+    }
+    if (shipping !== false) {
+      newProducts = newProducts.filter(
+        (item) => item.freeShipping === shipping
+      );
+    }
+    if (search !== '') {
+      newProducts = newProducts.filter((item) => {
+        let title = item.title.toLowerCase().trim();
+        return title.startsWith(search) ? item : null;
+      });
+    }
+    if (price !== 'all') {
+      newProducts = newProducts.filter((item) => {
+        if (price === 0) {
+          return item.price < 100;
+        } else if (price === 200) {
+          return item.price > 200 && item.price < 400;
+        } else {
+          return item.price > 400;
+        }
+      });
+    }
+    setPage(0);
+    setSorted(paginate(newProducts));
+  }, [filters, products]);
+
   const changePage = (index) => {
     setPage(index);
   };
   const updateFilters = (e) => {
-    console.log(e);
+    const type = e.target.type;
+    const filter = e.target.name;
+    const value = e.target.value;
+    let filterValue;
+    if (type === 'checkbox') {
+      filterValue = e.target.checked;
+    } else if (type === 'radio') {
+      value === 'all' ? (filterValue = value) : (filterValue = parseInt(value));
+    } else {
+      filterValue = value;
+    }
+    setFilters({ ...filters, [filter]: filterValue });
   };
 
   return (
