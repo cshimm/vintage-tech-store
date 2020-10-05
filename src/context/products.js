@@ -1,5 +1,5 @@
 import React from 'react';
-import { featuredProducts } from '../utils/helpers';
+import { featuredProducts, paginate } from '../utils/helpers';
 export const ProductContext = React.createContext();
 // import FeaturedProducts from '../components/Products/FeaturedProducts';
 // { Children }
@@ -16,6 +16,15 @@ export default function ProductProvider({ children }) {
   const [loading, setLoading] = React.useState(false);
   const [products, setProducts] = React.useState([]);
   const [featured, setFeatured] = React.useState([]);
+  // extra state values
+  const [sorted, setSorted] = React.useState([]);
+  const [page, setPage] = React.useState(0);
+  const [filters, setFilters] = React.useState({
+    search: '',
+    category: 'all',
+    shipping: false,
+    price: 'all',
+  });
 
   // used when content existed on strapi
 
@@ -47,16 +56,34 @@ export default function ProductProvider({ children }) {
 
       const featuredProduct = featuredProducts(productsArray);
 
-      setFeatured(featuredProduct);
-
+      setSorted(paginate(productsArray));
       setProducts(productsArray);
+      setFeatured(featuredProduct);
       setLoading(false);
     });
     return () => {};
   }, []);
 
+  const changePage = (index) => {
+    setPage(index);
+  };
+  const updateFilters = (e) => {
+    console.log(e);
+  };
+
   return (
-    <ProductContext.Provider value={{ products, loading, featured }}>
+    <ProductContext.Provider
+      value={{
+        products,
+        loading,
+        featured,
+        sorted,
+        page,
+        filters,
+        changePage,
+        updateFilters,
+      }}
+    >
       {children}
     </ProductContext.Provider>
   );
